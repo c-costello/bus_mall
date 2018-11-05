@@ -1,6 +1,6 @@
 'use strict';
 //array that catches all the objects created by Products
-products = [];
+var products = [];
 
 
 //function that creates new Products based on name and source
@@ -60,11 +60,10 @@ var tracker = {
     imageCenterEl.id = 'imgCenter';
     imageRightEl.id = 'imgRight';
     
-
-
-
-    
-
+    //create content;
+    imageLeftEl.src(products[this.getUniqueImages()[0]]);
+    imageLeftEl.src(products[this.getUniqueImages()[1]]);
+    imageLeftEl.src(products[this.getUniqueImages()[2]]);
   },
   addClickTracker: function() {
 
@@ -77,3 +76,5 @@ var tracker = {
 (function createProducts(){
 
 })();
+
+new Products('bag', 'assets/bag.jpg');
