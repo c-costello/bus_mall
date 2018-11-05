@@ -18,7 +18,7 @@ var tracker = {
   // mainEl: document.getElementById('main-content'),
 
   getRandomIndex: function(range) {
-    var randomNumber = Math.round(Math.random()*(range-1));
+    var randomNumber = Math.floor(Math.random()*(range));
     return(randomNumber);
   },
   getUniqueImages: function(range){
@@ -26,6 +26,9 @@ var tracker = {
     var imgCenterNum = this.getRandomIndex(range);
     var imgRightNum = this.getRandomIndex(range);
     console.log(imgLeftNum,imgCenterNum,imgLeftNum);
+    // remove duplicates
+    
+    
     //
     var imageLeft = products[imgLeftNum];
     console.log('imageLeft', imageLeft);
@@ -76,6 +79,7 @@ var tracker = {
     var imageRightEl = document.getElementById('imgRight');
     imageLeftEl.addEventListener('click', function(event){
       tracker.renderImages();
+
     });
     imageCenterEl.addEventListener('click', function(event){
       tracker.renderImages();
@@ -84,13 +88,9 @@ var tracker = {
       tracker.renderImages();
     });
 
-    
+  },
 
 
-
-  }, 
-  
-  
 };
 
 
@@ -104,5 +104,8 @@ new Products('bugglegum', './assets/bubblegum.jpg');
 (function createProducts(){
   tracker.renderImages();
   tracker.clickHandler();
+
+
+
 })();
 tracker;
