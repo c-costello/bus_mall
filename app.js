@@ -1,8 +1,8 @@
 'use strict';
 //array that catches all the objects created by Products
 var products = [];
-var check = [];
 var mainEl = document.getElementById('main-content');
+
 
 
 //function that creates new Products based on name and source
@@ -10,12 +10,13 @@ function Products(name, src){
   this.name = name;
   this.src = src;
   this.votes = 0;
+  this.appearances = 0;
 
   products.push(this);
 }
 
 var tracker = {
-  totalClicks: 0,
+  totalClicks: -1,
   // mainEl: document.getElementById('main-content'),
 
   getRandomIndex: function(range) {
@@ -25,17 +26,7 @@ var tracker = {
   getUniqueImages: function(range){
     var imgNum = this.getRandomIndex(range);
     var imageSpace = products[imgNum];
-    // var imgLeftNum = this.getRandomIndex(range);
-    // var imgCenterNum = this.getRandomIndex(range);
-    // var imgRightNum = this.getRandomIndex(range);
     return(imageSpace);
- 
-    // console.log(imgLeftNum,imgCenterNum,imgLeftNum);
-    
-    // var imageLeft = products[imgLeftNum];
-    // var imageCenter = products[imgCenterNum];
-    // var imageRight = products[imgRightNum];
-    // return([imageLeft, imageCenter, imageRight]);
   },
   renderImages: function(){
     var imgSectionElCheck = document.getElementById('imgSection');
@@ -68,6 +59,8 @@ var tracker = {
     while (imgCenter === imgLeft){
       if (imgCenter === imgLeft){
         imgCenter = this.getUniqueImages(products.length);
+
+
       }
     }
     var imgRight = this.getUniqueImages(products.length);
@@ -75,64 +68,157 @@ var tracker = {
       while (imgCenter === imgRight){
         if (imgCenter === imgRight){
           imgRight = this.getUniqueImages(products.length);
+
         }
       }
       while (imgRight === imgLeft){
         if (imgRight === imgLeft){
           imgRight = this.getUniqueImages(products.length);
+
         }
       }
     }
-    check.push(imgRight);
-    check.push(imgCenter);
-    check.push(imgLeft);
-    console.log('check',check);
+
 
     imageLeftEl.src = imgLeft.src;
     imageCenterEl.src = imgCenter.src;
     imageRightEl.src = imgRight.src;
-
+    for (var i = 0; i < products.length; i++){
+      if (products[i].src === imageLeftEl.src) {
+        products[i].appearances++;
+      }
+    }
+    for (var j = 0; j < products.length; j++){
+      if (products[j].src === imageCenterEl.src) {
+        products[j].appearances++;
+      }
+    }
+    for (var k = 0; k < products.length; k++){
+      if (products[k].src === imageRightEl.src) {
+        products[k].appearances++;
+      }
+    }
+    
+    //counter box;
     tracker.clickHandler();
+
+    
+    
+
+    
   },
   addClickTracker: function() {
-
+    this.totalClicks++;
+    
+    if ( this.totalClicks < 21){
+      var clickCounter = `Total Clicks: ${this.totalClicks}/20`;
+      var clickCounterEl = document.createElement('p');
+      var imageSectionEl = document.getElementById('imgSection');
+      imageSectionEl.appendChild(clickCounterEl);
+      clickCounterEl.textContent = clickCounter;
+    }
+    
+    console.log(this.totalClicks);
+    return(this.totalClicks);
   },
   clickHandler: function() {
-
     // var imageSectionEl = document.getElementById('imgSection');
-    var imageLeftEl = document.getElementById('imgLeft');
-    var imageCenterEl = document.getElementById('imgCenter');
-    var imageRightEl = document.getElementById('imgRight');
-    imageLeftEl.addEventListener('click', function(){
-      tracker.renderImages();
+    if (this.totalClicks < 19){
+      var imageLeftEl = document.getElementById('imgLeft');
+      var imageCenterEl = document.getElementById('imgCenter');
+      var imageRightEl = document.getElementById('imgRight');
+      imageLeftEl.addEventListener('click', function(){
+        tracker.renderImages();
+        console.log('img', imageLeftEl.src);
+        console.log('products', products[0].src);
+        tracker.addClickTracker();
+        for (var i = 0; i < products.length; i++){
+          if (products[i].src === imageLeftEl.src) {
+            products[i].votes++;
+            console.log(products[i].src);
+          }
+        }
+        
+      });
+      imageCenterEl.addEventListener('click', function(){
+        tracker.renderImages();
+        tracker.addClickTracker();
+        for (var i = 0; i < products.length; i++){
+          if (products[i].src === imageCenterEl.src) {
+            products[i].votes++;
+            console.log(products[i].src);
+          }
+        }
 
+      });
 
-    });
-    imageCenterEl.addEventListener('click', function(){
-      tracker.renderImages();
-    });
-    imageRightEl.addEventListener('click', function(){
-      tracker.renderImages();
-    });
+      imageRightEl.addEventListener('click', function(){
+        tracker.renderImages();
+        tracker.addClickTracker();
+        for (var i = 0; i < products.length; i++){
+          if (products[i].src === imageRightEl.src) {
+            products[i].votes++;
+            console.log(products[i].src);
+          }
+        }
+      });
+    }
+    if (this.totalClicks === 19){
+      var submitEl = document.createElement('button');
+      var imageSectionEl = document.getElementById('imgSection');
+      imageSectionEl.appendChild(submitEl);
+      submitEl.textContent = 'Results';
+      submitEl.addEventListener('click',function(){
+        tracker.renderData();
+      });
+    }
 
+    
   },
+  renderData: function() {
+    var listEl = document.createElement('ul');
+    mainEl.appendChild(listEl);
+    for (var i = 0; i < products.length; i++){
+      var liEl = document.createElement('li');
+      listEl.appendChild(liEl);
+      liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}/${products[i].appearances}`;
+    }
+    var resetButtonEl = document.createElement('button');
+    listEl.appendChild(resetButtonEl);
+    resetButtonEl.textContent = 'Reset';
+    resetButtonEl.type= 'submit';
+    resetButtonEl.addEventListener('submit', function(){
+    });
+  }
 };
 
 
-new Products('bag', './assets/bag.jpg');
-new Products('banana', './assets/banana.jpg');
-new Products('bathroom', './assets/bathroom.jpg');
-new Products('boots', './assets/boots.jpg');
-new Products('breakfast', './assets/breakfast.jpg');
-new Products('bubblegum', './assets/bubblegum.jpg');
-new Products('chair', './assets/chair.jpg');
-new Products('cthulhu', './assets/cthulhu.jpg');
-new Products('dog-duck', './assets/dog-duck.jpg');
+new Products('bag', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bag.jpg');
+new Products('banana', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/banana.jpg');
+new Products('bathroom', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bathroom.jpg');
+new Products('boots', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/boots.jpg');
+new Products('breakfast', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/breakfast.jpg');
+new Products('bubblegum', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bubblegum.jpg');
+new Products('chair', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/chair.jpg');
+new Products('cthulhu', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/cthulhu.jpg');
+new Products('dog-duck', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dog-duck.jpg');
+new Products ('dragon', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dragon.jpg');
+new Products ('pen', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/pen.jpg');
+new Products ('pet-sweep', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/pet-sweep.jpg');
+new Products ('scissors', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/scissors.jpg');
+new Products ('shark', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/shark.jpg');
+new Products ('sweep', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/sweep.jpg');
+new Products ('tauntaun', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/tauntaun.jpg');
+new Products ('unicorn', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/unicorn.jpg');
+new Products ('usb', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/usb.jpg');
+new Products ('water-can', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/water-can.jpg');
+new Products ('wine-glass', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/wine-glass.jpg');
+
+
 
 (function createProducts(){
   tracker.renderImages();
   tracker.clickHandler();
-
 
 
 })();
