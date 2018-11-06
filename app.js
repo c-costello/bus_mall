@@ -1,7 +1,6 @@
 'use strict';
 //array that catches all the objects created by Products
 var products = [];
-var counter = [];
 var mainEl = document.getElementById('main-content');
 
 
@@ -105,9 +104,6 @@ var tracker = {
     
     console.log(this.totalClicks);
     return(this.totalClicks);
-    // var totalClicksEl = document.createElement('p');
-    // mainEl.appendChild(totalClicksEl);
-    // this.totalClicksEl.textContent = tracker.totalClicks;
   },
   clickHandler: function() {
     // var imageSectionEl = document.getElementById('imgSection');
@@ -117,8 +113,16 @@ var tracker = {
       var imageRightEl = document.getElementById('imgRight');
       imageLeftEl.addEventListener('click', function(){
         tracker.renderImages();
-        console.log(imageLeftEl.src);
+        console.log('img', imageLeftEl.src);
+        console.log('products', products[0].src);
         tracker.addClickTracker();
+        for (var i = 0; i < products.length; i++){
+          if (products[i].src === imageLeftEl.src) {
+            products[i].votes++;
+            console.log(products[i].src);
+          }
+        }
+        
       });
       imageCenterEl.addEventListener('click', function(){
         tracker.renderImages();
@@ -151,19 +155,25 @@ var tracker = {
       listEl.appendChild(liEl);
       liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}`;
     }
+    var resetButtonEl = document.createElement('button');
+    listEl.appendChild(resetButtonEl);
+    resetButtonEl.textContent = 'Reset';
+    resetButtonEl.type= 'button';
+    resetButtonEl.addEventListener('submit', function(){
+    });
   }
 };
 
 
-new Products('bag', './assets/bag.jpg');
-new Products('banana', './assets/banana.jpg');
-new Products('bathroom', './assets/bathroom.jpg');
-new Products('boots', './assets/boots.jpg');
-new Products('breakfast', './assets/breakfast.jpg');
-new Products('bubblegum', './assets/bubblegum.jpg');
-new Products('chair', './assets/chair.jpg');
-new Products('cthulhu', './assets/cthulhu.jpg');
-new Products('dog-duck', './assets/dog-duck.jpg');
+new Products('bag', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bag.jpg');
+new Products('banana', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/banana.jpg');
+new Products('bathroom', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bathroom.jpg');
+new Products('boots', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/boots.jpg');
+new Products('breakfast', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/breakfast.jpg');
+new Products('bubblegum', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bubblegum.jpg');
+new Products('chair', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/chair.jpg');
+new Products('cthulhu', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/cthulhu.jpg');
+new Products('dog-duck', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dog-duck.jpg');
 
 (function createProducts(){
   tracker.renderImages();
