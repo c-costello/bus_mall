@@ -125,19 +125,22 @@ var tracker = {
         tracker.addClickTracker();
 
       });
+
       imageRightEl.addEventListener('click', function(){
         tracker.renderImages();
         tracker.addClickTracker();
       });
-      if (this.totalClicks === 18){
-        var submitEl = document.createElement('button');
-        var imageSectionEl = document.getElementById('imgSection');
-        imageSectionEl.appendChild(submitEl);
-        submitEl.value = 'button';
-
-      }
     }
+    if (this.totalClicks === 19){
+      var submitEl = document.createElement('button');
+      var imageSectionEl = document.getElementById('imgSection');
+      imageSectionEl.appendChild(submitEl);
+      submitEl.textContent = 'Results';
+    }
+
+    
   },
+
 };
 
 
