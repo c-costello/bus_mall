@@ -26,10 +26,7 @@ var tracker = {
     var imgCenterNum = this.getRandomIndex(range);
     var imgRightNum = this.getRandomIndex(range);
     console.log(imgLeftNum,imgCenterNum,imgLeftNum);
-    // remove duplicates
-    
-    
-    //
+
     var imageLeft = products[imgLeftNum];
     console.log('imageLeft', imageLeft);
     var imageCenter = products[imgCenterNum];
@@ -67,24 +64,26 @@ var tracker = {
     imageLeftEl.src = this.getUniqueImages(products.length)[0].src;
     imageCenterEl.src = this.getUniqueImages(products.length)[1].src;
     imageRightEl.src = this.getUniqueImages(products.length)[2].src;
+
+    tracker.clickHandler();
   },
   addClickTracker: function() {
 
   },
-  clickHandler: function(event) {
+  clickHandler: function() {
 
-    var imageSectionEl = document.getElementById('imgSection');
+    // var imageSectionEl = document.getElementById('imgSection');
     var imageLeftEl = document.getElementById('imgLeft');
     var imageCenterEl = document.getElementById('imgCenter');
     var imageRightEl = document.getElementById('imgRight');
-    imageLeftEl.addEventListener('click', function(event){
+    imageLeftEl.addEventListener('click', function(){
       tracker.renderImages();
 
     });
-    imageCenterEl.addEventListener('click', function(event){
+    imageCenterEl.addEventListener('click', function(){
       tracker.renderImages();
     });
-    imageRightEl.addEventListener('click', function(event){
+    imageRightEl.addEventListener('click', function(){
       tracker.renderImages();
     });
 
@@ -99,7 +98,10 @@ new Products('banana', './assets/banana.jpg');
 new Products('bathroom', './assets/bathroom.jpg');
 new Products('boots', './assets/boots.jpg');
 new Products('breakfast', './assets/breakfast.jpg');
-new Products('bugglegum', './assets/bubblegum.jpg');
+new Products('bubblegum', './assets/bubblegum.jpg');
+new Products('chair', './assets/chair.jpg');
+new Products('cthulhu', './assets/cthulhu.jpg');
+new Products('dog-duck', './assets/dog-duck.jpg');
 
 (function createProducts(){
   tracker.renderImages();
@@ -108,4 +110,3 @@ new Products('bugglegum', './assets/bubblegum.jpg');
 
 
 })();
-tracker;
