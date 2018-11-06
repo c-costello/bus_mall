@@ -1,0 +1,40 @@
+header{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background-color: grey;
+}
+h1 {
+  font-size: 200%;
+}
+footer {
+  width: 960px;
+  padding-left: auto;
+  padding-right: auto;
+}
+main{
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  width: 260px;
+  border: 3px black;
+  border-style: groove;
+  margin: 20px;
+}
+
+#imgSection {
+  border: 2px solid black;
+  margin-top: 30px;
+  height: 340px;
+  width: 920px;
+
+}
+
+#imgSection p {
+  text-align: right;
+  margin-right: 20px;
+
+}

@@ -1,8 +1,9 @@
 'use strict';
 //array that catches all the objects created by Products
 var products = [];
-var check = [];
+var counter = [];
 var mainEl = document.getElementById('main-content');
+
 
 
 //function that creates new Products based on name and source
@@ -15,7 +16,7 @@ function Products(name, src){
 }
 
 var tracker = {
-  totalClicks: 0,
+  totalClicks: -1,
   // mainEl: document.getElementById('main-content'),
 
   getRandomIndex: function(range) {
@@ -25,17 +26,7 @@ var tracker = {
   getUniqueImages: function(range){
     var imgNum = this.getRandomIndex(range);
     var imageSpace = products[imgNum];
-    // var imgLeftNum = this.getRandomIndex(range);
-    // var imgCenterNum = this.getRandomIndex(range);
-    // var imgRightNum = this.getRandomIndex(range);
     return(imageSpace);
- 
-    // console.log(imgLeftNum,imgCenterNum,imgLeftNum);
-    
-    // var imageLeft = products[imgLeftNum];
-    // var imageCenter = products[imgCenterNum];
-    // var imageRight = products[imgRightNum];
-    // return([imageLeft, imageCenter, imageRight]);
   },
   renderImages: function(){
     var imgSectionElCheck = document.getElementById('imgSection');
@@ -68,6 +59,8 @@ var tracker = {
     while (imgCenter === imgLeft){
       if (imgCenter === imgLeft){
         imgCenter = this.getUniqueImages(products.length);
+
+
       }
     }
     var imgRight = this.getUniqueImages(products.length);
@@ -75,46 +68,73 @@ var tracker = {
       while (imgCenter === imgRight){
         if (imgCenter === imgRight){
           imgRight = this.getUniqueImages(products.length);
+
         }
       }
       while (imgRight === imgLeft){
         if (imgRight === imgLeft){
           imgRight = this.getUniqueImages(products.length);
+
         }
       }
     }
-    check.push(imgRight);
-    check.push(imgCenter);
-    check.push(imgLeft);
-    console.log('check',check);
+
 
     imageLeftEl.src = imgLeft.src;
     imageCenterEl.src = imgCenter.src;
     imageRightEl.src = imgRight.src;
-
+    
+    //counter box;
     tracker.clickHandler();
+
+    
+    
+
+    
   },
   addClickTracker: function() {
-
+    this.totalClicks++;
+    
+    if ( this.totalClicks < 21){
+      var clickCounter = `Total Clicks: ${this.totalClicks}/20`;
+      var clickCounterEl = document.createElement('p');
+      var imageSectionEl = document.getElementById('imgSection');
+      imageSectionEl.appendChild(clickCounterEl);
+      clickCounterEl.textContent = clickCounter;
+    }
+    
+    console.log(this.totalClicks);
+    return(this.totalClicks);
+    // var totalClicksEl = document.createElement('p');
+    // mainEl.appendChild(totalClicksEl);
+    // this.totalClicksEl.textContent = tracker.totalClicks;
   },
   clickHandler: function() {
-
     // var imageSectionEl = document.getElementById('imgSection');
-    var imageLeftEl = document.getElementById('imgLeft');
-    var imageCenterEl = document.getElementById('imgCenter');
-    var imageRightEl = document.getElementById('imgRight');
-    imageLeftEl.addEventListener('click', function(){
-      tracker.renderImages();
+    if (this.totalClicks < 19){
+      var imageLeftEl = document.getElementById('imgLeft');
+      var imageCenterEl = document.getElementById('imgCenter');
+      var imageRightEl = document.getElementById('imgRight');
+      imageLeftEl.addEventListener('click', function(){
+        tracker.renderImages();
+        console.log(imageLeftEl.src);
+        tracker.addClickTracker();
+      });
+      imageCenterEl.addEventListener('click', function(){
+        tracker.renderImages();
+        tracker.addClickTracker();
 
-
-    });
-    imageCenterEl.addEventListener('click', function(){
-      tracker.renderImages();
-    });
-    imageRightEl.addEventListener('click', function(){
-      tracker.renderImages();
-    });
-
+      });
+      imageRightEl.addEventListener('click', function(){
+        tracker.renderImages();
+        tracker.addClickTracker();
+      });
+      if (this.totalClicks === 19){
+        var submitEl = document.createElement('button');
+        var imageSectionEl = document.getElementById('imgSection');
+        imageSectionEl.appendChild(submitEl);
+      }
+    }
   },
 };
 
@@ -132,7 +152,6 @@ new Products('dog-duck', './assets/dog-duck.jpg');
 (function createProducts(){
   tracker.renderImages();
   tracker.clickHandler();
-
 
 
 })();
