@@ -22,19 +22,21 @@ var tracker = {
     return(randomNumber);
   },
   getUniqueImages: function(range){
+
     var imgLeftNum = this.getRandomIndex(range);
     var imgCenterNum = this.getRandomIndex(range);
     var imgRightNum = this.getRandomIndex(range);
+    
+ 
     console.log(imgLeftNum,imgCenterNum,imgLeftNum);
 
     var imageLeft = products[imgLeftNum];
-    console.log('imageLeft', imageLeft);
     var imageCenter = products[imgCenterNum];
     var imageRight = products[imgRightNum];
     return([imageLeft, imageCenter, imageRight]);
   },
   renderImages: function(){
-    this.getUniqueImages();
+
 
     var imgSectionElCheck = document.getElementById('imgSection');
     if (imgSectionElCheck) {
@@ -61,9 +63,14 @@ var tracker = {
     imageRightEl.id = 'imgRight';
 
     //create content;
-    imageLeftEl.src = this.getUniqueImages(products.length)[0].src;
-    imageCenterEl.src = this.getUniqueImages(products.length)[1].src;
-    imageRightEl.src = this.getUniqueImages(products.length)[2].src;
+    var imgLeft = this.getUniqueImages(products.length)[0];
+    var imgCenter = this.getUniqueImages(products.length)[1];
+    var imgRight = this.getUniqueImages(products.length)[2];
+ 
+
+    imageLeftEl.src = imgLeft.src;
+    imageCenterEl.src = imgCenter.src;
+    imageRightEl.src = imgRight.src;
 
     tracker.clickHandler();
   },
@@ -79,6 +86,7 @@ var tracker = {
     imageLeftEl.addEventListener('click', function(){
       tracker.renderImages();
 
+
     });
     imageCenterEl.addEventListener('click', function(){
       tracker.renderImages();
@@ -88,8 +96,6 @@ var tracker = {
     });
 
   },
-
-
 };
 
 
