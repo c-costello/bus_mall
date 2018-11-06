@@ -7,6 +7,7 @@ header{
 }
 h1 {
   font-size: 200%;
+  Padding: 5px;
 }
 footer {
   width: 960px;
@@ -20,17 +21,18 @@ main{
 }
 img {
   width: 260px;
-  border: 3px black;
-  border-style: groove;
   margin: 20px;
 }
 
 #imgSection {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   margin-top: 30px;
   height: 340px;
   width: 920px;
   position: relative;
+  background-color: rgb(150, 150, 197);
+  background: red;
+  background: linear-gradient(red, orange);
 
 }
 
@@ -47,4 +49,9 @@ button {
   bottom: 0px;
   margin-left: 20px;
   margin-bottom: 20px;
+}
+
+ul {
+  font-family: sans-serif;
+  columns:3;
 }

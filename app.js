@@ -88,14 +88,14 @@ var tracker = {
         products[i].appearances++;
       }
     }
-    for (var i = 0; i < products.length; i++){
-      if (products[i].src === imageCenterEl.src) {
-        products[i].appearances++;
+    for (var j = 0; j < products.length; j++){
+      if (products[j].src === imageCenterEl.src) {
+        products[j].appearances++;
       }
     }
-    for (var i = 0; i < products.length; i++){
-      if (products[i].src === imageRightEl.src) {
-        products[i].appearances++;
+    for (var k = 0; k < products.length; k++){
+      if (products[k].src === imageRightEl.src) {
+        products[k].appearances++;
       }
     }
     
@@ -186,7 +186,7 @@ var tracker = {
     var resetButtonEl = document.createElement('button');
     listEl.appendChild(resetButtonEl);
     resetButtonEl.textContent = 'Reset';
-    resetButtonEl.type= 'button';
+    resetButtonEl.type= 'submit';
     resetButtonEl.addEventListener('submit', function(){
     });
   }
@@ -202,6 +202,19 @@ new Products('bubblegum', 'file:///C:/Users/clari/codefellows/201/projects/bus_m
 new Products('chair', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/chair.jpg');
 new Products('cthulhu', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/cthulhu.jpg');
 new Products('dog-duck', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dog-duck.jpg');
+new Products ('dragon', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dragon.jpg');
+new Products ('pen', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/pen.jpg');
+new Products ('pet-sweep', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/pet-sweep.jpg');
+new Products ('scissors', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/scissors.jpg');
+new Products ('shark', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/shark.jpg');
+new Products ('sweep', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/sweep.jpg');
+new Products ('tauntaun', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/tauntaun.jpg');
+new Products ('unicorn', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/unicorn.jpg');
+new Products ('usb', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/usb.jpg');
+new Products ('water-can', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/water-can.jpg');
+new Products ('wine-glass', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/wine-glass.jpg');
+
+
 
 (function createProducts(){
   tracker.renderImages();
