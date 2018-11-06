@@ -136,11 +136,22 @@ var tracker = {
       var imageSectionEl = document.getElementById('imgSection');
       imageSectionEl.appendChild(submitEl);
       submitEl.textContent = 'Results';
+      submitEl.addEventListener('click',function(){
+        tracker.renderData();
+      });
     }
 
     
   },
-
+  renderData: function() {
+    var listEl = document.createElement('ul');
+    mainEl.appendChild(listEl);
+    for (var i = 0; i < products.length; i++){
+      var liEl = document.createElement('li');
+      listEl.appendChild(liEl);
+      liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}`;
+    }
+  }
 };
 
 
