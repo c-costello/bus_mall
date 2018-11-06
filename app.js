@@ -1,6 +1,7 @@
 'use strict';
 //array that catches all the objects created by Products
 var products = [];
+var check = [];
 var mainEl = document.getElementById('main-content');
 
 
@@ -22,22 +23,21 @@ var tracker = {
     return(randomNumber);
   },
   getUniqueImages: function(range){
-
-    var imgLeftNum = this.getRandomIndex(range);
-    var imgCenterNum = this.getRandomIndex(range);
-    var imgRightNum = this.getRandomIndex(range);
-    
+    var imgNum = this.getRandomIndex(range);
+    var imageSpace = products[imgNum];
+    // var imgLeftNum = this.getRandomIndex(range);
+    // var imgCenterNum = this.getRandomIndex(range);
+    // var imgRightNum = this.getRandomIndex(range);
+    return(imageSpace);
  
-    console.log(imgLeftNum,imgCenterNum,imgLeftNum);
-
-    var imageLeft = products[imgLeftNum];
-    var imageCenter = products[imgCenterNum];
-    var imageRight = products[imgRightNum];
-    return([imageLeft, imageCenter, imageRight]);
+    // console.log(imgLeftNum,imgCenterNum,imgLeftNum);
+    
+    // var imageLeft = products[imgLeftNum];
+    // var imageCenter = products[imgCenterNum];
+    // var imageRight = products[imgRightNum];
+    // return([imageLeft, imageCenter, imageRight]);
   },
   renderImages: function(){
-
-
     var imgSectionElCheck = document.getElementById('imgSection');
     if (imgSectionElCheck) {
       imgSectionElCheck.remove();
@@ -63,10 +63,30 @@ var tracker = {
     imageRightEl.id = 'imgRight';
 
     //create content;
-    var imgLeft = this.getUniqueImages(products.length)[0];
-    var imgCenter = this.getUniqueImages(products.length)[1];
-    var imgRight = this.getUniqueImages(products.length)[2];
- 
+    var imgLeft = this.getUniqueImages(products.length);
+    var imgCenter = this.getUniqueImages(products.length);
+    while (imgCenter === imgLeft){
+      if (imgCenter === imgLeft){
+        imgCenter = this.getUniqueImages(products.length);
+      }
+    }
+    var imgRight = this.getUniqueImages(products.length);
+    while (imgCenter === imgRight || imgLeft === imgRight){
+      while (imgCenter === imgRight){
+        if (imgCenter === imgRight){
+          imgRight = this.getUniqueImages(products.length);
+        }
+      }
+      while (imgRight === imgLeft){
+        if (imgRight === imgLeft){
+          imgRight = this.getUniqueImages(products.length);
+        }
+      }
+    }
+    check.push(imgRight);
+    check.push(imgCenter);
+    check.push(imgLeft);
+    console.log('check',check);
 
     imageLeftEl.src = imgLeft.src;
     imageCenterEl.src = imgCenter.src;
