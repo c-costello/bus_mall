@@ -183,12 +183,13 @@ var tracker = {
       listEl.appendChild(liEl);
       liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}/${products[i].appearances}`;
     }
-    var resetButtonEl = document.createElement('button');
-    listEl.appendChild(resetButtonEl);
-    resetButtonEl.textContent = 'Reset';
-    resetButtonEl.type= 'submit';
-    resetButtonEl.addEventListener('submit', function(){
-    });
+    // var resetButtonEl = document.createElement('button');
+    // listEl.appendChild(resetButtonEl);
+    // resetButtonEl.textContent = 'Reset';
+    // resetButtonEl.value = 'refresh page';
+    // resetButtonEl.addEventListener('onclock', function(){
+    //   window.location.reload();
+    // });
   }
 };
 
