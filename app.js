@@ -110,8 +110,8 @@ var tracker = {
   addClickTracker: function() {
     this.totalClicks++;
     
-    if ( this.totalClicks < 21){
-      var clickCounter = `Total Clicks: ${this.totalClicks}/20`;
+    if ( this.totalClicks < 26){
+      var clickCounter = `Total Clicks: ${this.totalClicks}/25`;
       var clickCounterEl = document.createElement('p');
       var imageSectionEl = document.getElementById('imgSection');
       imageSectionEl.appendChild(clickCounterEl);
@@ -123,7 +123,7 @@ var tracker = {
   },
   clickHandler: function() {
     // var imageSectionEl = document.getElementById('imgSection');
-    if (this.totalClicks < 19){
+    if (this.totalClicks < 24){
       var imageLeftEl = document.getElementById('imgLeft');
       var imageCenterEl = document.getElementById('imgCenter');
       var imageRightEl = document.getElementById('imgRight');
@@ -163,7 +163,7 @@ var tracker = {
         }
       });
     }
-    if (this.totalClicks === 19){
+    if (this.totalClicks === 24){
       var submitEl = document.createElement('button');
       var imageSectionEl = document.getElementById('imgSection');
       imageSectionEl.appendChild(submitEl);
