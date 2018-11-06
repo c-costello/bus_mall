@@ -10,6 +10,7 @@ function Products(name, src){
   this.name = name;
   this.src = src;
   this.votes = 0;
+  this.appearances = 0;
 
   products.push(this);
 }
@@ -82,6 +83,21 @@ var tracker = {
     imageLeftEl.src = imgLeft.src;
     imageCenterEl.src = imgCenter.src;
     imageRightEl.src = imgRight.src;
+    for (var i = 0; i < products.length; i++){
+      if (products[i].src === imageLeftEl.src) {
+        products[i].appearances++;
+      }
+    }
+    for (var i = 0; i < products.length; i++){
+      if (products[i].src === imageCenterEl.src) {
+        products[i].appearances++;
+      }
+    }
+    for (var i = 0; i < products.length; i++){
+      if (products[i].src === imageRightEl.src) {
+        products[i].appearances++;
+      }
+    }
     
     //counter box;
     tracker.clickHandler();
@@ -127,12 +143,24 @@ var tracker = {
       imageCenterEl.addEventListener('click', function(){
         tracker.renderImages();
         tracker.addClickTracker();
+        for (var i = 0; i < products.length; i++){
+          if (products[i].src === imageCenterEl.src) {
+            products[i].votes++;
+            console.log(products[i].src);
+          }
+        }
 
       });
 
       imageRightEl.addEventListener('click', function(){
         tracker.renderImages();
         tracker.addClickTracker();
+        for (var i = 0; i < products.length; i++){
+          if (products[i].src === imageRightEl.src) {
+            products[i].votes++;
+            console.log(products[i].src);
+          }
+        }
       });
     }
     if (this.totalClicks === 19){
@@ -153,7 +181,7 @@ var tracker = {
     for (var i = 0; i < products.length; i++){
       var liEl = document.createElement('li');
       listEl.appendChild(liEl);
-      liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}`;
+      liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}/${products[i].appearances}`;
     }
     var resetButtonEl = document.createElement('button');
     listEl.appendChild(resetButtonEl);
