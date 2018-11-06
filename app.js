@@ -129,10 +129,12 @@ var tracker = {
         tracker.renderImages();
         tracker.addClickTracker();
       });
-      if (this.totalClicks === 19){
+      if (this.totalClicks === 18){
         var submitEl = document.createElement('button');
         var imageSectionEl = document.getElementById('imgSection');
         imageSectionEl.appendChild(submitEl);
+        submitEl.value = 'button';
+
       }
     }
   },

@@ -30,6 +30,7 @@ img {
   margin-top: 30px;
   height: 340px;
   width: 920px;
+  position: relative;
 
 }
 
@@ -37,4 +38,13 @@ img {
   text-align: right;
   margin-right: 20px;
 
+}
+button {
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
