@@ -3,20 +3,17 @@
 var products = [];
 var mainEl = document.getElementById('main-content');
 var imgSEl = document.getElementById('imageSection1');
-var ctx = document.getElementById("myChart").getContext('2d');
+
 
 
 
 //function that creates new Products based on name and source
-function Products(name, src){
+function Products(name, src,){
   this.name = name;
   this.src = src;
   this.votes = 0;
   this.appearances = 0;
-  var cOne = Math.floor(Math.random()*255);
-  var cTwo = Math.floor(Math.random()*255);
-  var cThree = Math.floor(Math.random()*255);
-  this.color = `rgb(${cOne}, ${cTwo}, ${cThree}, 0.3)`;
+
 
   products.push(this);
 }
@@ -135,8 +132,7 @@ var tracker = {
       var imageRightEl = document.getElementById('imgRight');
       imageLeftEl.addEventListener('click', function(){
         tracker.renderImages();
-        console.log('img', imageLeftEl.src);
-        console.log('products', products[0].src);
+
         tracker.addClickTracker();
         for (var i = 0; i < products.length; i++){
           if (products[i].src === imageLeftEl.src) {
@@ -229,37 +225,37 @@ var tracker = {
     
     var myChart = new Chart(ctx, chartConfig);
   },
-    // var resetButtonEl = document.createElement('button');
-    // listEl.appendChild(resetButtonEl);
-    // resetButtonEl.textContent = 'Reset';
-    // resetButtonEl.value = 'refresh page';
-    // resetButtonEl.addEventListener('onclock', function(){
-    //   window.location.reload();
-    // });
+  // var resetButtonEl = document.createElement('button');
+  // mainEl.appendChild(resetButtonEl);
+  // resetButtonEl.textContent = 'Reset';
+  // resetButtonEl.value = 'refresh page';
+  // resetButtonEl.addEventListener('onclock', function(){
+  //   window.location.reload();
+  // });
   // }
 };
 
 
-new Products('bag', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bag.jpg');
-new Products('banana', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/banana.jpg');
-new Products('bathroom', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bathroom.jpg');
-new Products('boots', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/boots.jpg');
-new Products('breakfast', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/breakfast.jpg');
-new Products('bubblegum', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/bubblegum.jpg');
-new Products('chair', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/chair.jpg');
-new Products('cthulhu', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/cthulhu.jpg');
-new Products('dog-duck', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dog-duck.jpg');
-new Products ('dragon', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/dragon.jpg');
-new Products ('pen', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/pen.jpg');
-new Products ('pet-sweep', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/pet-sweep.jpg');
-new Products ('scissors', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/scissors.jpg');
-new Products ('shark', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/shark.jpg');
-new Products ('sweep', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/sweep.jpg');
-new Products ('tauntaun', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/tauntaun.jpg');
-new Products ('unicorn', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/unicorn.jpg');
-new Products ('usb', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/usb.jpg');
-new Products ('water-can', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/water-can.jpg');
-new Products ('wine-glass', 'file:///C:/Users/clari/codefellows/201/projects/bus_mall/assets/wine-glass.jpg');
+new Products('bag', './assets/bag.jpg');
+new Products('banana', './assets/banana.jpg');
+new Products('bathroom', './assets/bathroom.jpg');
+new Products('boots', './assets/boots.jpg');
+new Products('breakfast', './assets/breakfast.jpg');
+new Products('bubblegum', './assets/bubblegum.jpg');
+new Products('chair', './assets/chair.jpg');
+new Products('cthulhu', './assets/cthulhu.jpg');
+new Products('dog-duck', './assets/dog-duck.jpg');
+new Products ('dragon', './assets/dragon.jpg');
+new Products ('pen', './assets/pen.jpg');
+new Products ('pet-sweep', './assets/pet-sweep.jpg');
+new Products ('scissors', './assets/scissors.jpg');
+new Products ('shark', './assets/shark.jpg');
+new Products ('sweep', './assets/sweep.jpg');
+new Products ('tauntaun', './assets/tauntaun.jpg');
+new Products ('unicorn', './assets/unicorn.jpg');
+new Products ('usb', './assets/usb.jpg');
+new Products ('water-can', './assets/water-can.jpg');
+new Products ('wine-glass', './assets/wine-glass.jpg');
 
 
 
