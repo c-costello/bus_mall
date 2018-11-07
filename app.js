@@ -182,6 +182,7 @@ var tracker = {
       submitEl.textContent = 'Results';
       submitEl.addEventListener('click',function(){
         tracker.renderGraph();
+
       });
     }
 
@@ -197,12 +198,15 @@ var tracker = {
     }
   },
   renderGraph: function(){
+    var voteDataJ = localStorage.getItem('voteData');
+    var voteData = JSON.parse(voteDataJ);
     var names = [];
     var votes = [];
     var colors = [];
     for (var i = 0; i < products.length; i++){
       names.push(products[i].name);
       votes.push(products[i].votes);
+      votes[i] += voteData[i];
       colors.push(products[i].color);
     }
     var chartConfig = {
@@ -226,16 +230,12 @@ var tracker = {
       }
     };
     var myChart = new Chart(ctx, chartConfig);
+    
 
-  }
-  // var resetButtonEl = document.createElement('button');
-  // mainEl.appendChild(resetButtonEl);
-  // resetButtonEl.textContent = 'Reset';
-  // resetButtonEl.value = 'refresh page';
-  // resetButtonEl.addEventListener('onclock', function(){
-  //   window.location.reload();
-  // });
-  // }
+    var votesJson = JSON.stringify(votes);
+    localStorage.setItem('voteData',votesJson);
+  },
+
 };
 
 
