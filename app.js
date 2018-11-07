@@ -8,7 +8,7 @@ var imgSEl = document.getElementById('imageSection1');
 
 
 //function that creates new Products based on name and source
-function Products(name, src,){
+function Products(name, src){
   this.name = name;
   this.src = src;
   this.votes = 0;
@@ -84,20 +84,23 @@ var tracker = {
 
 
     imageLeftEl.src = imgLeft.src;
+    imageLeftEl.name = imgLeft.name;
     imageCenterEl.src = imgCenter.src;
+    imageCenterEl.name = imgCenter.name;
     imageRightEl.src = imgRight.src;
+    imageRightEl.name = imgRight.name;
     for (var i = 0; i < products.length; i++){
-      if (products[i].src === imageLeftEl.src) {
+      if (products[i].name === imageLeftEl.name) {
         products[i].appearances++;
       }
     }
     for (var j = 0; j < products.length; j++){
-      if (products[j].src === imageCenterEl.src) {
+      if (products[j].name === imageCenterEl.name) {
         products[j].appearances++;
       }
     }
     for (var k = 0; k < products.length; k++){
-      if (products[k].src === imageRightEl.src) {
+      if (products[k].name === imageRightEl.name) {
         products[k].appearances++;
       }
     }
@@ -135,7 +138,7 @@ var tracker = {
 
         tracker.addClickTracker();
         for (var i = 0; i < products.length; i++){
-          if (products[i].src === imageLeftEl.src) {
+          if (products[i].name === imageLeftEl.name) {
             products[i].votes++;
             console.log(products[i].src);
           }
@@ -146,7 +149,7 @@ var tracker = {
         tracker.renderImages();
         tracker.addClickTracker();
         for (var i = 0; i < products.length; i++){
-          if (products[i].src === imageCenterEl.src) { //create id for images to make this better
+          if (products[i].name === imageCenterEl.name) { //create id for images to make this better
             products[i].votes++;                        // match id and name rather than src and src 
             console.log(products[i].src);
           }
@@ -158,7 +161,7 @@ var tracker = {
         tracker.renderImages();
         tracker.addClickTracker();
         for (var i = 0; i < products.length; i++){
-          if (products[i].src === imageRightEl.src) {
+          if (products[i].name === imageRightEl.name) {
             products[i].votes++;
             console.log(products[i].src);
           }
@@ -178,52 +181,13 @@ var tracker = {
     
   },
   renderData: function() {
-    
-    var names = [];
-    for (var i = 0; i < products.length; i++) {
-      names.push(products[i].name);
+    var listEl = document.createElement('ul');
+    mainEl.appendChild(listEl);
+    for (var i = 0; i < products.length; i++){
+      var liEl = document.createElement('li');
+      listEl.appendChild(liEl);
+      liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}/${products[i].appearances}`;
     }
-
-    var votes = [];
-    for (var j = 0; j < products.length; j++) {
-      votes.push(products[j].votes);
-    }
-    var colors = [];
-    for (var k = 0; k < products.length; k++) {
-      colors.push(products[k].color);
-    }
-    var chartConfig = {
-      type: 'bar',
-      data: {
-        labels: names,
-        datasets: [{
-          label: '# of Votes',
-          data: votes,
-          backgroundColor: colors,
-          // borderColor: [
-          //   'rgba(255,99,132,1)',
-          //   'rgba(54, 162, 235, 1)',
-          //   'rgba(255, 206, 86, 1)',
-          //   'rgba(75, 192, 192, 1)',
-          //   'rgba(153, 102, 255, 1)',
-          //   'rgba(255, 159, 64, 1)'
-          // ],
-          // borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    };
-    
-    
-    var myChart = new Chart(ctx, chartConfig);
   },
   // var resetButtonEl = document.createElement('button');
   // mainEl.appendChild(resetButtonEl);
