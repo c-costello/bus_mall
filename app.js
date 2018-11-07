@@ -23,6 +23,7 @@ function Products(name, src) {
 
 var tracker = {
   totalClicks: 0,
+  
   // mainEl: document.getElementById('main-content'),
 
   getRandomIndex: function(range) {
@@ -61,6 +62,7 @@ var tracker = {
 
     //create content;
     var imgLeft = this.getUniqueImages(products.length);
+    
     var imgCenter = this.getUniqueImages(products.length);
     while (imgCenter === imgLeft) {
       if (imgCenter === imgLeft) {
@@ -133,9 +135,9 @@ var tracker = {
         }
       });
       imageCenterEl.addEventListener('click', function() {
-        this.totalClicks++;
+        tracker.totalClicks++;
         tracker.renderImages();
-        this.addClickTracker();
+
         for (var i = 0; i < products.length; i++) {
           if (products[i].name === imageCenterEl.name) {
             products[i].votes++;
@@ -144,9 +146,9 @@ var tracker = {
       });
 
       imageRightEl.addEventListener('click', function() {
-        this.totalClicks++;
+        tracker.totalClicks++;
         tracker.renderImages();
-        this.addClickTracker();
+
         for (var i = 0; i < products.length; i++) {
           if (products[i].name === imageRightEl.name) {
             products[i].votes++;
