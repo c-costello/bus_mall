@@ -26,7 +26,7 @@ function Products(name, src){
 }
 
 var tracker = {
-  totalClicks: -1,
+  totalClicks: 0,
   // mainEl: document.getElementById('main-content'),
 
   getRandomIndex: function(range) {
@@ -114,6 +114,7 @@ var tracker = {
     
     //counter box;
     tracker.clickHandler();
+    tracker.addClickTracker();
 
     
     
@@ -121,9 +122,9 @@ var tracker = {
     
   },
   addClickTracker: function() {
-    this.totalClicks++;
     
-    if ( this.totalClicks < 26){
+    
+    if ( this.totalClicks < 27){
       var clickCounter = `Total Clicks: ${this.totalClicks}/25`;
       var clickCounterEl = document.createElement('p');
       var imageSectionEl = document.getElementById('imgSection');
@@ -136,14 +137,15 @@ var tracker = {
   },
   clickHandler: function() {
     // var imageSectionEl = document.getElementById('imgSection');
-    if (this.totalClicks < 24){
+    if (this.totalClicks < 25){
       var imageLeftEl = document.getElementById('imgLeft');
       var imageCenterEl = document.getElementById('imgCenter');
       var imageRightEl = document.getElementById('imgRight');
       imageLeftEl.addEventListener('click', function(){
         tracker.renderImages();
-
-        tracker.addClickTracker();
+        tracker.totalClicks++;
+        
+        
         for (var i = 0; i < products.length; i++){
           if (products[i].name === imageLeftEl.name) {
             products[i].votes++;
@@ -152,12 +154,13 @@ var tracker = {
         }
         
       });
-      imageCenterEl.addEventListener('click', function(){ //name your functions
+      imageCenterEl.addEventListener('click', function(){ 
         tracker.renderImages();
-        tracker.addClickTracker();
+        this.totalClicks++;
+        this.addClickTracker();
         for (var i = 0; i < products.length; i++){
-          if (products[i].name === imageCenterEl.name) { //create id for images to make this better
-            products[i].votes++;                        // match id and name rather than src and src 
+          if (products[i].name === imageCenterEl.name) { 
+            products[i].votes++;                        
             console.log(products[i].src);
           }
         }
@@ -166,7 +169,8 @@ var tracker = {
 
       imageRightEl.addEventListener('click', function(){
         tracker.renderImages();
-        tracker.addClickTracker();
+        this.totalClicks++;
+        this.addClickTracker();
         for (var i = 0; i < products.length; i++){
           if (products[i].name === imageRightEl.name) {
             products[i].votes++;
@@ -175,18 +179,16 @@ var tracker = {
         }
       });
     }
-    if (this.totalClicks === 24){
+    if (this.totalClicks === 25){
       var submitEl = document.createElement('button');
       var imageSectionEl = document.getElementById('imgSection');
       imageSectionEl.appendChild(submitEl);
       submitEl.textContent = 'Results';
       submitEl.addEventListener('click',function(){
         tracker.renderGraph();
-
       });
+      
     }
-
-    
   },
   renderData: function() {
     var listEl = document.createElement('ul');
@@ -198,17 +200,15 @@ var tracker = {
     }
   },
   renderGraph: function(){
-    var voteDataJ = localStorage.getItem('voteData');
-    var voteData = JSON.parse(voteDataJ);
     var names = [];
-    var votes = [];
     var colors = [];
+    var votes = [];
     for (var i = 0; i < products.length; i++){
       names.push(products[i].name);
       votes.push(products[i].votes);
-      votes[i] += voteData[i];
       colors.push(products[i].color);
     }
+
     var chartConfig = {
       type: 'bar',
       data: {
@@ -230,10 +230,7 @@ var tracker = {
       }
     };
     var myChart = new Chart(ctx, chartConfig);
-    
 
-    var votesJson = JSON.stringify(votes);
-    localStorage.setItem('voteData',votesJson);
   },
 
 };
