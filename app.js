@@ -2,6 +2,8 @@
 //array that catches all the objects created by Products
 var products = [];
 var mainEl = document.getElementById('main-content');
+var imgSEl = document.getElementById('imageSection1');
+var ctx = document.getElementById("myChart").getContext('2d');
 
 
 
@@ -11,6 +13,10 @@ function Products(name, src){
   this.src = src;
   this.votes = 0;
   this.appearances = 0;
+  var cOne = Math.floor(Math.random()*255);
+  var cTwo = Math.floor(Math.random()*255);
+  var cThree = Math.floor(Math.random()*255);
+  this.color = `rgb(${cOne}, ${cTwo}, ${cThree}, 0.3)`;
 
   products.push(this);
 }
@@ -45,7 +51,7 @@ var tracker = {
     imageSectionEl.appendChild(imageRightEl);
 
     //append section
-    mainEl.appendChild(imageSectionEl);
+    imgSEl.appendChild(imageSectionEl);
 
     //create ids
     imageSectionEl.id = 'imgSection';
@@ -140,12 +146,12 @@ var tracker = {
         }
         
       });
-      imageCenterEl.addEventListener('click', function(){
+      imageCenterEl.addEventListener('click', function(){ //name your functions
         tracker.renderImages();
         tracker.addClickTracker();
         for (var i = 0; i < products.length; i++){
-          if (products[i].src === imageCenterEl.src) {
-            products[i].votes++;
+          if (products[i].src === imageCenterEl.src) { //create id for images to make this better
+            products[i].votes++;                        // match id and name rather than src and src 
             console.log(products[i].src);
           }
         }
@@ -176,13 +182,53 @@ var tracker = {
     
   },
   renderData: function() {
-    var listEl = document.createElement('ul');
-    mainEl.appendChild(listEl);
-    for (var i = 0; i < products.length; i++){
-      var liEl = document.createElement('li');
-      listEl.appendChild(liEl);
-      liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}/${products[i].appearances}`;
+    
+    var names = [];
+    for (var i = 0; i < products.length; i++) {
+      names.push(products[i].name);
     }
+
+    var votes = [];
+    for (var j = 0; j < products.length; j++) {
+      votes.push(products[j].votes);
+    }
+    var colors = [];
+    for (var k = 0; k < products.length; k++) {
+      colors.push(products[k].color);
+    }
+    var chartConfig = {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [{
+          label: '# of Votes',
+          data: votes,
+          backgroundColor: colors,
+          // borderColor: [
+          //   'rgba(255,99,132,1)',
+          //   'rgba(54, 162, 235, 1)',
+          //   'rgba(255, 206, 86, 1)',
+          //   'rgba(75, 192, 192, 1)',
+          //   'rgba(153, 102, 255, 1)',
+          //   'rgba(255, 159, 64, 1)'
+          // ],
+          // borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    };
+    
+    
+    var myChart = new Chart(ctx, chartConfig);
+  },
     // var resetButtonEl = document.createElement('button');
     // listEl.appendChild(resetButtonEl);
     // resetButtonEl.textContent = 'Reset';
@@ -190,7 +236,7 @@ var tracker = {
     // resetButtonEl.addEventListener('onclock', function(){
     //   window.location.reload();
     // });
-  }
+  // }
 };
 
 
@@ -220,6 +266,14 @@ new Products ('wine-glass', 'file:///C:/Users/clari/codefellows/201/projects/bus
 (function createProducts(){
   tracker.renderImages();
   tracker.clickHandler();
-
-
 })();
+
+
+//Chart
+
+
+
+
+
+
+
