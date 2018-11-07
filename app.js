@@ -3,6 +3,7 @@
 var products = [];
 var mainEl = document.getElementById('main-content');
 var imgSEl = document.getElementById('imageSection1');
+var ctx = document.getElementById("myChart").getContext('2d');
 
 
 
@@ -13,6 +14,12 @@ function Products(name, src){
   this.src = src;
   this.votes = 0;
   this.appearances = 0;
+
+  var cOne = Math.floor(Math.random()*255);
+  var cTwo = Math.floor(Math.random()*255);
+  var cThree = Math.floor(Math.random()*255);
+
+  this.color = `rgb(${cOne}, ${cTwo}, ${cThree}, 0.3)`;
 
 
   products.push(this);
@@ -174,7 +181,7 @@ var tracker = {
       imageSectionEl.appendChild(submitEl);
       submitEl.textContent = 'Results';
       submitEl.addEventListener('click',function(){
-        tracker.renderData();
+        tracker.renderGraph();
       });
     }
 
@@ -189,6 +196,38 @@ var tracker = {
       liEl.textContent = `${products[i].name} vote(s): ${products[i].votes}/${products[i].appearances}`;
     }
   },
+  renderGraph: function(){
+    var names = [];
+    var votes = [];
+    var colors = [];
+    for (var i = 0; i < products.length; i++){
+      names.push(products[i].name);
+      votes.push(products[i].votes);
+      colors.push(products[i].color);
+    }
+    var chartConfig = {
+      type: 'bar',
+      data: {
+        labels: names,
+        datasets: [{
+          label: '# of Votes',
+          data: votes,
+          backgroundColor: colors,
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    };
+    var myChart = new Chart(ctx, chartConfig);
+
+  }
   // var resetButtonEl = document.createElement('button');
   // mainEl.appendChild(resetButtonEl);
   // resetButtonEl.textContent = 'Reset';
