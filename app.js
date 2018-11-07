@@ -102,8 +102,6 @@ var tracker = {
         products[k].appearances++;
       }
     }
-
-    //counter box;
     tracker.clickHandler();
     tracker.addClickTracker();
   },
@@ -115,8 +113,6 @@ var tracker = {
       imageSectionEl.appendChild(clickCounterEl);
       clickCounterEl.textContent = clickCounter;
     }
-
-    console.log(this.totalClicks);
     return this.totalClicks;
   },
   clickHandler: function() {
@@ -126,8 +122,8 @@ var tracker = {
       var imageCenterEl = document.getElementById('imgCenter');
       var imageRightEl = document.getElementById('imgRight');
       imageLeftEl.addEventListener('click', function() {
-        tracker.renderImages();
         tracker.totalClicks++;
+        tracker.renderImages();
 
         for (var i = 0; i < products.length; i++) {
           if (products[i].name === imageLeftEl.name) {
@@ -137,25 +133,23 @@ var tracker = {
         }
       });
       imageCenterEl.addEventListener('click', function() {
-        tracker.renderImages();
         this.totalClicks++;
+        tracker.renderImages();
         this.addClickTracker();
         for (var i = 0; i < products.length; i++) {
           if (products[i].name === imageCenterEl.name) {
             products[i].votes++;
-            console.log(products[i].src);
           }
         }
       });
 
       imageRightEl.addEventListener('click', function() {
-        tracker.renderImages();
         this.totalClicks++;
+        tracker.renderImages();
         this.addClickTracker();
         for (var i = 0; i < products.length; i++) {
           if (products[i].name === imageRightEl.name) {
             products[i].votes++;
-            console.log(products[i].src);
           }
         }
       });
@@ -188,7 +182,6 @@ var tracker = {
     if (localStorage.getItem('voteData')) {
       var voteData = localStorage.getItem('voteData');
       votes = JSON.parse(voteData);
-      console.log('yes');
     }
     for (var i = 0; i < products.length; i++) {
       names.push(products[i].name);
@@ -250,7 +243,4 @@ new Products('wine-glass', './assets/wine-glass.jpg');
 
 (function createProducts() {
   tracker.renderImages();
-  tracker.clickHandler();
 })();
-
-//Chart
