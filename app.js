@@ -200,6 +200,15 @@ var tracker = {
     }
   },
   renderGraph: function(){
+    if(localStorage.getItem('voteData')) {
+      var voteData = localStorage.getItem('voteData');
+      myChart.data.datasets[0].data = JSON.parse(voteData);
+    
+    
+      // myChart.data.datasets[0].data = JSON.parse(localStorage.getItem('voteData'));
+    
+      myChart.update();
+    }
     var names = [];
     var colors = [];
     var votes = [];
@@ -230,7 +239,9 @@ var tracker = {
       }
     };
     var myChart = new Chart(ctx, chartConfig);
-
+    
+    var jsonData = JSON.stringify(myChart.data.datasets[0].data);
+    localStorage.setItem('voteData', jsonData);
   },
 
 };
