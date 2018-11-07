@@ -200,21 +200,17 @@ var tracker = {
     }
   },
   renderGraph: function(){
-    if(localStorage.getItem('voteData')) {
-      var voteData = localStorage.getItem('voteData');
-      myChart.data.datasets[0].data = JSON.parse(voteData);
-    
-    
-      // myChart.data.datasets[0].data = JSON.parse(localStorage.getItem('voteData'));
-    
-      myChart.update();
-    }
     var names = [];
     var colors = [];
-    var votes = [];
+    var votes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    if(localStorage.getItem('voteData')) {
+      var voteData = localStorage.getItem('voteData');
+      votes = JSON.parse(voteData);
+      console.log('yes');
+    }
     for (var i = 0; i < products.length; i++){
       names.push(products[i].name);
-      votes.push(products[i].votes);
+      votes[i] +=products[i].votes;
       colors.push(products[i].color);
     }
 
