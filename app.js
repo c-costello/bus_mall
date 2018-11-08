@@ -106,6 +106,7 @@ var tracker = {
     }
     tracker.clickHandler();
     tracker.addClickTracker();
+    tracker.renderData();
   },
   addClickTracker: function() {
     if (this.totalClicks < 27) {
@@ -167,8 +168,15 @@ var tracker = {
     }
   },
   renderData: function() {
+    var listElCheck = document.getElementById('dataList');
+    if (listElCheck){
+      listElCheck.remove();
+    }
     var listEl = document.createElement('ul');
-    mainEl.appendChild(listEl);
+    listEl.id = ('dataList');
+    listEl.textContent = 'Results This Round';
+    var imageSection1El = document.getElementById('imageSection1');
+    imageSection1El.appendChild(listEl);
     for (var i = 0; i < products.length; i++) {
       var liEl = document.createElement('li');
       listEl.appendChild(liEl);
@@ -176,6 +184,14 @@ var tracker = {
         products[i].appearances
       }`;
     }
+    var resetEl = document.createElement('button');
+    listEl.appendChild(resetEl);
+    resetEl.textContent = 'reset';
+    resetEl.addEventListener('click', function() {
+      event.preventDefault;
+      window.location.reload(true);
+    });
+
   },
   renderGraph: function() {
     var names = [];
