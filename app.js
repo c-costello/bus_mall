@@ -228,8 +228,8 @@ var tracker = {
     };
     var myChart = new Chart(ctx, chartConfig);
 
-    var jsonData = JSON.stringify(myChart.data.datasets[0].data);
-    localStorage.setItem('voteData', jsonData);
+    // var jsonData = JSON.stringify(myChart.data.datasets[0].data);
+    // localStorage.setItem('voteData', jsonData);
   }
 };
 
