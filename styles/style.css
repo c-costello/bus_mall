@@ -8,7 +8,6 @@ header{
   text-align: center;
   top: 0px;
   background-color: lightsalmon;
-  position: fixed;
   z-index: 2;
 }
 h1 {
@@ -27,27 +26,32 @@ main{
   height: 1000px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
   font-family: 'Nunito', sans-serif;
   background: rgb(214, 185, 185);
   z-index: 1;
   /* background: linear-gradient(rgb(81, 80, 100), rgb(155, 189, 218)); */
 }
 img {
-  width: 250px;
+  width: 180px;
   margin: 30px;
-  border: 5px solid;
-  border-style: outset;
+  margin-top: 60px;
+  border: 5px solid grey;
+  border-radius: 50%;
 }
-
+#imageSection1 {
+  position: relative;
+  width: 960px;
+  height: 430px;
+}
 #imgSection {
   /* outline: 2px solid black; */
   padding-top: 30px;
-  height: 370px;
-  width: 960px;
-  position: relative;
+  height: 430px;
+  width: 760px;
+  position: absolute;
   background: rgb(226,165,112);
   background: linear-gradient(rgb(226, 165, 112), rgb(214,185,185));
+  right: 0px;
 }
 
 #imgSection p {
@@ -55,7 +59,7 @@ img {
   margin-right: 20px;
   font-family: 'Nunito', sans-serif;
   position: absolute;
-  bottom: 0px;
+  bottom: 130px;
   right: 0px;
 
 }
@@ -64,17 +68,44 @@ button {
   height: 24px;
   font-family: 'Nunito', sans-serif;
   padding: 2px;
+  border: none;
+  background-color: white;
 }
 #imgSection button {
   position: absolute;
-  left: 0px;
-  bottom: 2px;
-  margin-left: 30px;
+  left: 10%;
+  bottom: 40px;
+  width: 600px;
+  height: 60px;
+  font-size: 30px;
+
 
   
 }
 ul {
   font-family: 'Nunito', sans-serif;
-  column-count: 3;
-  padding: 30px;
+  font-size: 20px;
+  position: absolute;
+  left: 0px;
+  padding-left: 10px;
+  padding-top: 5px;
+  top: 0px;
+  width: 190px;
+  height: 430px;
+  background-color: rgba(102, 86, 102, 0.726);
+  background: linear-gradient(rgb(102, 86, 102, 0.726), rgb(214,185,185));
+  
+}
+li {
+  font-size: 16px;
+  padding-top: 2px;
+}
+
+ul button {
+  margin: 3px;
+  margin-top: 10px;
+  width: 170px;
+}
+#myChart{
+  margin-top: 30px;
 }

@@ -106,6 +106,7 @@ var tracker = {
     }
     tracker.clickHandler();
     tracker.addClickTracker();
+    tracker.renderData();
   },
   addClickTracker: function() {
     if (this.totalClicks < 27) {
@@ -157,18 +158,20 @@ var tracker = {
       });
     }
     if (this.totalClicks === 25) {
-      var submitEl = document.createElement('button');
-      var imageSectionEl = document.getElementById('imgSection');
-      imageSectionEl.appendChild(submitEl);
-      submitEl.textContent = 'Results';
-      submitEl.addEventListener('click', function() {
-        tracker.renderGraph();
-      });
+      tracker.renderGraph();
     }
+    
   },
   renderData: function() {
+    var listElCheck = document.getElementById('dataList');
+    if (listElCheck){
+      listElCheck.remove();
+    }
     var listEl = document.createElement('ul');
-    mainEl.appendChild(listEl);
+    listEl.id = ('dataList');
+    listEl.textContent = 'Results This Round';
+    var imageSection1El = document.getElementById('imageSection1');
+    imageSection1El.appendChild(listEl);
     for (var i = 0; i < products.length; i++) {
       var liEl = document.createElement('li');
       listEl.appendChild(liEl);
@@ -176,6 +179,14 @@ var tracker = {
         products[i].appearances
       }`;
     }
+    var resetEl = document.createElement('button');
+    listEl.appendChild(resetEl);
+    resetEl.textContent = 'reset';
+    resetEl.addEventListener('click', function() {
+      event.preventDefault;
+      window.location.reload(true);
+    });
+
   },
   renderGraph: function() {
     var names = [];
@@ -197,7 +208,7 @@ var tracker = {
         labels: names,
         datasets: [
           {
-            label: '# of Votes',
+            label: '# of Total Votes',
             data: votes,
             backgroundColor: colors
           }
@@ -217,8 +228,8 @@ var tracker = {
     };
     var myChart = new Chart(ctx, chartConfig);
 
-    var jsonData = JSON.stringify(myChart.data.datasets[0].data);
-    localStorage.setItem('voteData', jsonData);
+    // var jsonData = JSON.stringify(myChart.data.datasets[0].data);
+    // localStorage.setItem('voteData', jsonData);
   }
 };
 
