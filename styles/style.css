@@ -8,7 +8,6 @@ header{
   text-align: center;
   top: 0px;
   background-color: lightsalmon;
-  position: fixed;
   z-index: 2;
 }
 h1 {
@@ -27,7 +26,6 @@ main{
   height: 1000px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
   font-family: 'Nunito', sans-serif;
   background: rgb(214, 185, 185);
   z-index: 1;
@@ -36,12 +34,12 @@ main{
 img {
   width: 180px;
   margin: 30px;
+  margin-top: 30px;
   border: 5px solid grey;
   border-radius: 50%;
 }
 #imageSection1 {
   position: relative;
-  outline: 1px solid black;
   width: 960px;
   height: 430px;
 }
@@ -71,13 +69,15 @@ button {
   font-family: 'Nunito', sans-serif;
   padding: 2px;
   border: none;
+  background-color: white;
 }
 #imgSection button {
   position: absolute;
-  left: 0px;
+  left: 10%;
   bottom: 40px;
-  margin-left: 30px;
-  width: 200px;
+  width: 600px;
+  height: 60px;
+  font-size: 30px;
 
 
   
@@ -89,7 +89,7 @@ ul {
   left: 0px;
   padding-left: 10px;
   padding-top: 5px;
-  top: 20px;
+  top: 0px;
   width: 190px;
   height: 430px;
   background-color: rgba(102, 86, 102, 0.726);
@@ -103,4 +103,9 @@ li {
 
 ul button {
   margin: 3px;
+  margin-top: 10px;
+  width: 170px;
+}
+#myChart{
+  margin-top: 30px;
 }

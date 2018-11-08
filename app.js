@@ -213,7 +213,7 @@ var tracker = {
         labels: names,
         datasets: [
           {
-            label: '# of Votes',
+            label: '# of Total Votes',
             data: votes,
             backgroundColor: colors
           }
