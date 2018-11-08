@@ -158,14 +158,9 @@ var tracker = {
       });
     }
     if (this.totalClicks === 25) {
-      var submitEl = document.createElement('button');
-      var imageSectionEl = document.getElementById('imgSection');
-      imageSectionEl.appendChild(submitEl);
-      submitEl.textContent = 'Results';
-      submitEl.addEventListener('click', function() {
-        tracker.renderGraph();
-      });
+      tracker.renderGraph();
     }
+    
   },
   renderData: function() {
     var listElCheck = document.getElementById('dataList');
