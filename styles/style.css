@@ -109,3 +109,7 @@ ul button {
 #myChart{
   margin-top: 30px;
 }
+
+#full-reset-button{
+  width: 200px;
+}

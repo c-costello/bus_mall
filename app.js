@@ -228,8 +228,17 @@ var tracker = {
     };
     var myChart = new Chart(ctx, chartConfig);
 
-    // var jsonData = JSON.stringify(myChart.data.datasets[0].data);
-    // localStorage.setItem('voteData', jsonData);
+    var jsonData = JSON.stringify(myChart.data.datasets[0].data);
+    localStorage.setItem('voteData', jsonData);
+
+    var buttonEl = document.createElement('button');
+    mainEl.appendChild(buttonEl);
+    buttonEl.textContent = 'Reset ALL Results';
+    buttonEl.addEventListener('click', function(){
+      localStorage.clear();
+      window.location.reload(true);
+    });
+    buttonEl.id = 'full-reset-button';
   }
 };
 
